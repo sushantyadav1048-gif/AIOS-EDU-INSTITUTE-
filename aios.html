@@ -1,0 +1,51 @@
+<input id="email" placeholder="Email">
+<input id="pass" type="password" placeholder="Password">
+<button onclick="login()">Login</button>
+
+<script src="firebase.js"></script>
+
+<script>
+function login(){
+let email=document.getElementById("email").value;
+let pass=document.getElementById("pass").value;
+
+firebase.auth().signInWithEmailAndPassword(email,pass)
+.then(()=>{
+window.location="dashboard.html";
+})
+.catch(()=>alert("Login Failed"));
+}
+</script>
+function markAttendance(name,status){
+db.collection("attendance").add({
+name:name,
+status:status,
+date:new Date()
+});
+}
+function sendNotice(msg){
+db.collection("notice").add({
+message:msg,
+time:new Date()
+});
+}
+function check(){
+let score=0;
+
+if(q1=="A") score++;
+if(q2=="B") score++;
+
+alert("Score: "+score);
+}
+function bot(msg){
+
+if(msg.includes("fees")){
+return "7th ₹7000, 8th ₹8000, 9th ₹8500, 10th ₹9000";
+}
+
+if(msg.includes("course")){
+return "Classes 7–10 available";
+}
+
+return "Contact AIOS INSTITUTE: 8651770199";
+}
